@@ -53,3 +53,22 @@ video, #frame, #canvas {
     border-radius: 10px;
     text-decoration: none;
 }
+video {
+    z-index: 1;
+}
+
+#frame {
+    z-index: 3;
+}
+
+#btn-capturar {
+    z-index: 5;
+}
+
+#btn-salvar {
+    z-index: 6;
+}
+
+canvas {
+    z-index: 4;
+}
