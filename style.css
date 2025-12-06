@@ -16,7 +16,7 @@ body {
 .camera-area {
   position: relative;
   width: 100%;
-  padding-top: 133%; /* para manter proporção vertical (4:3) — ajusta conforme sua moldura */
+  padding-top: 177%; /* para manter proporção vertical (9:16) — ajusta conforme sua moldura */
 }
 
 video, #frame, #canvas {
