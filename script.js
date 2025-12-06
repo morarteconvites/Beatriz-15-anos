@@ -41,3 +41,14 @@ takePhotoBtn.onclick = () => {
 };
 
 startCamera();
+let usandoFrontal = false;
+
+document.getElementById("btn-virar").onclick = () => {
+    usandoFrontal = !usandoFrontal;
+
+    navigator.mediaDevices.getUserMedia({
+        video: { facingMode: usandoFrontal ? "user" : "environment" }
+    }).then(stream => {
+        video.srcObject = stream;
+    });
+};
