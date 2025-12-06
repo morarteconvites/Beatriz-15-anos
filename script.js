@@ -1,3 +1,11 @@
+navigator.mediaDevices.getUserMedia({ video: { facingMode: currentFacingMode } })
+  .then(stream => {
+    video.srcObject = stream;
+  })
+  .catch(err => {
+    console.error("Erro ao acessar a câmera:", err);
+    alert("Não foi possível acessar a câmera: " + err.name);
+  });
 const video = document.getElementById("video");
 const canvas = document.getElementById("canvas");
 const switchBtn = document.getElementById("switchCamera");
