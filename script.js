@@ -1,54 +1,43 @@
-let video = document.getElementById("video");
-let canvas = document.getElementById("canvas");
-let switchBtn = document.getElementById("switchCamera");
-let takePhotoBtn = document.getElementById("takePhoto");
-let downloadLink = document.getElementById("downloadLink");
+const video = document.getElementById("video");
+const canvas = document.getElementById("canvas");
+const switchBtn = document.getElementById("switchCamera");
+const takePhotoBtn = document.getElementById("takePhoto");
+const downloadLink = document.getElementById("downloadLink");
 
-let currentCamera = "user"; // frontal
+let currentFacingMode = "user";
 
-function startCamera() {
-    navigator.mediaDevices.getUserMedia({
-        video: { facingMode: currentCamera }
-    })
-    .then(stream => {
-        video.srcObject = stream;
-    })
-    .catch(err => {
-        alert("Erro ao acessar câmera: " + err);
+async function startCamera() {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({
+      video: { facingMode: currentFacingMode },
+      audio: false
     });
+    video.srcObject = stream;
+  } catch (err) {
+    console.error("Erro ao acessar a câmera:", err);
+    alert("Não foi possível acessar a câmera. Verifique permissões.");
+  }
 }
 
 switchBtn.onclick = () => {
-    currentCamera = currentCamera === "user" ? "environment" : "user";
-    startCamera();
+  currentFacingMode = currentFacingMode === "user" ? "environment" : "user";
+  startCamera();
 };
 
 takePhotoBtn.onclick = () => {
-    let context = canvas.getContext("2d");
+  const ctx = canvas.getContext("2d");
+  canvas.width = video.videoWidth;
+  canvas.height = video.videoHeight;
 
-    canvas.width = video.videoWidth;
-    canvas.height = video.videoHeight;
+  ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+  const frameImg = document.getElementById("frame");
+  ctx.drawImage(frameImg, 0, 0, canvas.width, canvas.height);
 
-    context.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-    let frame = document.getElementById("frame");
-    context.drawImage(frame, 0, 0, canvas.width, canvas.height);
-
-    let imageData = canvas.toDataURL("image/png");
-
-    downloadLink.href = imageData;
-    downloadLink.click();
+  const dataUrl = canvas.toDataURL("image/png");
+  downloadLink.href = dataUrl;
+  downloadLink.download = "foto_com_moldura.png";
+  downloadLink.style.display = "block";
+  downloadLink.click();
 };
 
 startCamera();
-let usandoFrontal = false;
-
-document.getElementById("btn-virar").onclick = () => {
-    usandoFrontal = !usandoFrontal;
-
-    navigator.mediaDevices.getUserMedia({
-        video: { facingMode: usandoFrontal ? "user" : "environment" }
-    }).then(stream => {
-        video.srcObject = stream;
-    });
-};
