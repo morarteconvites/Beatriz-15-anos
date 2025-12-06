@@ -1,74 +1,47 @@
 body {
     margin: 0;
     background: #000;
-    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
 }
 
 .container {
     position: relative;
     width: 100%;
-    height: 100%;
+    max-width: 400px;
 }
 
-video, #frame, #canvas {
+.camera-area {
+    position: relative;
+    width: 100%;
+}
+
+video, canvas, #frame {
+    width: 100%;
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
 }
 
 #frame {
     pointer-events: none;
 }
 
-#btn-capturar {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 12px 20px;
+.buttons {
+    margin-top: 420px;
+    display: flex;
+    justify-content: space-between;
+}
+
+button {
+    padding: 10px 20px;
     border: none;
-    font-size: 18px;
+    border-radius: 10px;
     background: #ffffffaa;
-    border-radius: 10px;
+    font-size: 16px;
     cursor: pointer;
-}
-
-#btn-salvar {
-    display: none;
-    position: absolute;
-    bottom: 80px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 12px 20px;
-    font-size: 18px;
-    background: #4CAF50;
-    color: #fff;
-    border-radius: 10px;
-    text-decoration: none;
-}
-video {
-    z-index: 1;
-}
-
-#frame {
-    z-index: 3;
-}
-
-#btn-capturar {
-    z-index: 5;
-}
-
-#btn-salvar {
-    z-index: 6;
-}
-
-canvas {
-    z-index: 4;
 }
