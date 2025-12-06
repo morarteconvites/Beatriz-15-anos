@@ -1,55 +1,53 @@
 body {
-    margin: 0;
-    background: #000;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+  margin: 0;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .container {
-    position: relative;
-    width: 100%;
-    height: 100%;
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+}
+
+.camera-area {
+  position: relative;
+  width: 100%;
+  padding-top: 133%; /* para manter proporção vertical (4:3) — ajusta conforme sua moldura */
 }
 
 video, #frame, #canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 #frame {
-    pointer-events: none; /* moldura não bloqueia o clique */
+  pointer-events: none;
+  z-index: 2;
 }
 
-#btn-capturar {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 12px 20px;
-    border: none;
-    font-size: 18px;
-    background: #ffffffaa;
-    border-radius: 10px;
-    cursor: pointer;
+video {
+  z-index: 1;
 }
 
-#btn-salvar {
-    display: none;
-    position: absolute;
-    bottom: 80px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 12px 20px;
-    font-size: 18px;
-    background: #4CAF50;
-    color: #fff;
-    border-radius: 10px;
-    text-decoration: none;
+.buttons {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-around;
+}
+
+button {
+  padding: 8px 16px;
+  background: rgba(255,255,255,0.8);
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
 }
